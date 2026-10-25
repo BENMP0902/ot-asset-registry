@@ -1,0 +1,39 @@
+# === Secretos y configuración local ===
+.env                      # Variables sensibles (SECRET_KEY, credenciales BD). NUNCA al repo.
+!.env.example             # Excepción: la plantilla SIN secretos SÍ se versiona.
+
+# === Base de datos de desarrollo ===
+*.sqlite3                 # La BD local son datos, no código. No se versiona.
+*.sqlite3-journal
+
+# === Entorno virtual de Python ===
+venv/                     # Se reconstruye desde requirements.txt.
+.venv/
+env/
+ENV/
+
+# === Artefactos de Python ===
+__pycache__/              # Bytecode regenerable.
+*.py[cod]
+*$py.class
+
+# === Django ===
+/media/                   # Archivos subidos por usuarios.
+/staticfiles/             # Salida de collectstatic (se genera en despliegue).
+/static_root/
+*.log                     # Logs locales.
+local_settings.py
+
+# NOTA: NO ignorar las carpetas migrations/ — las migraciones SON el diseño
+# versionado del esquema de base de datos y deben ir al repositorio.
+
+# === Editores / Sistema operativo ===
+.vscode/                  # Config local del editor (preferencia personal).
+.idea/
+.DS_Store                 # macOS.
+Thumbs.db                 # Windows.
+
+# === Cobertura y pruebas ===
+.coverage
+htmlcov/
+.pytest_cache/

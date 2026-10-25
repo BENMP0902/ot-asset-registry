@@ -1,0 +1,18 @@
+# Normaliza los finales de línea a LF dentro del repositorio.
+# Evita el ruido de diffs y los bugs de scripts cuando se trabaja
+# entre Windows (CRLF) y Linux/WSL (LF).
+
+* text=auto eol=lf
+
+# Archivos específicos de Windows que sí deben conservar CRLF:
+*.bat   text eol=crlf
+*.cmd   text eol=crlf
+*.ps1   text eol=crlf
+
+# Tratar como binarios (sin normalización de fin de línea):
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.pdf   binary
+*.sqlite3 binary
