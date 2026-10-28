@@ -30,11 +30,11 @@ sistema para lograr una meta. No es "un usuario" genérico: es un *rol*.
 
 ```mermaid
 flowchart LR
-    admin[["👤 Administrador OT"]]
-    operador[["👤 Operador"]]
+    admin["Administrador OT"]
+    operador["Operador"]
 
     subgraph SYS["Sistema OT-Asset-Registry"]
-        uc01(["UC-01 Iniciar sesión"])
+        uc01(["UC-01 Iniciar sesion"])
         uc02(["UC-02 Gestionar tipos de activo"])
         uc03(["UC-03 Gestionar zonas"])
         uc04(["UC-04 Dar de alta activo"])
@@ -43,7 +43,7 @@ flowchart LR
         uc07(["UC-07 Reubicar activo"])
         uc08(["UC-08 Dar de baja activo"])
         uc09(["UC-09 Consultar historial"])
-        uc10(["UC-10 Ver reporte de anomalías"])
+        uc10(["UC-10 Ver reporte de anomalias"])
         ucm(["UC-M Registrar movimiento"])
     end
 
@@ -59,10 +59,13 @@ flowchart LR
     admin --- uc06
     admin --- uc08
 
-    uc04 -. include .-> ucm
-    uc07 -. include .-> ucm
-    uc08 -. include .-> ucm
+    uc04 -.->|include| ucm
+    uc07 -.->|include| ucm
+    uc08 -.->|include| ucm
 ```
+
+> Nota de compatibilidad: sin emojis y con la forma canónica de arista
+> `-.->|include|`, para que GitHub renderice el diagrama sin error.
 
 Las asociaciones del Administrador con UC-01/05/07/09/10 se heredan del Operador
 (no se redibujan). El Administrador añade UC-02, 03, 04, 06 y 08.

@@ -26,18 +26,18 @@ classDiagram
     direction LR
 
     class User {
-        <<Django auth.User>>
         +String username
         +String password_hash
         +Boolean is_active
-        +Group[] groups
+        +List~Group~ groups
     }
+    note for User "Modelo nativo django.contrib.auth.User"
 
     class AssetType {
         +int id
         +String name
         +String description
-        +__str__() String
+        +str() String
     }
 
     class Zone {
@@ -45,7 +45,7 @@ classDiagram
         +String code
         +String name
         +String description
-        +__str__() String
+        +str() String
     }
 
     class Asset {
@@ -60,13 +60,13 @@ classDiagram
     }
 
     class AssetMovement {
-        <<append-only>>
         +int id
         +MovementType movement_type
         +DateTime timestamp
         +String note
-        +__str__() String
+        +str() String
     }
+    note for AssetMovement "Append-only: se inserta, nunca se edita ni se borra"
 
     class MovementType {
         <<enumeration>>
@@ -83,12 +83,17 @@ classDiagram
 
     AssetType "1" --> "0..*" Asset : categoriza
     Asset "1" --> "0..*" AssetMovement : registra
-    Zone "1" --> "0..*" AssetMovement : origen (from_zone)
-    Zone "1" --> "0..*" AssetMovement : destino (to_zone)
+    Zone "1" --> "0..*" AssetMovement : from_zone
+    Zone "1" --> "0..*" AssetMovement : to_zone
     User "1" --> "0..*" AssetMovement : ejecutada_por
     AssetMovement ..> MovementType : usa
     Asset ..> AssetStatus : deriva
 ```
+
+> Nota de compatibilidad: este diagrama usa el subconjunto conservador de Mermaid
+> (sin emojis, etiquetas de relación sin paréntesis, `List~Group~` en vez de
+> `Group[]`, estereotipos movidos a notas) para que el renderizador de GitHub lo
+> dibuje sin error. El contenido no cambia respecto al diseño; solo la sintaxis.
 
 ## Notas por clase
 
