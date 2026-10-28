@@ -21,6 +21,14 @@
 
 ## Diagrama
 
+![Diagrama de clases de OT-Asset-Registry](img/02-diagrama-clases.png)
+
+> El diagrama se muestra como PNG renderizado para garantizar su despliegue en
+> GitHub. El código fuente Mermaid queda abajo (versionable y editable).
+
+<details>
+<summary>Código fuente del diagrama (Mermaid)</summary>
+
 ```mermaid
 classDiagram
     direction LR
@@ -90,10 +98,7 @@ classDiagram
     Asset ..> AssetStatus : deriva
 ```
 
-> Nota de compatibilidad: este diagrama usa el subconjunto conservador de Mermaid
-> (sin emojis, etiquetas de relación sin paréntesis, `List~Group~` en vez de
-> `Group[]`, estereotipos movidos a notas) para que el renderizador de GitHub lo
-> dibuje sin error. El contenido no cambia respecto al diseño; solo la sintaxis.
+</details>
 
 ## Notas por clase
 

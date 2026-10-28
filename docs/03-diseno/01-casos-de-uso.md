@@ -24,9 +24,14 @@ sistema para lograr una meta. No es "un usuario" genérico: es un *rol*.
 
 ## Diagrama de casos de uso
 
-> Nota: Mermaid no tiene un tipo de diagrama de casos de uso UML nativo. Este es
-> un flowchart que lo aproxima (renderiza nativo en GitHub). El rigor formal
-> vive en las especificaciones de abajo.
+![Diagrama de casos de uso de OT-Asset-Registry](img/01-casos-de-uso.png)
+
+> El diagrama se muestra como PNG renderizado para garantizar su despliegue en
+> GitHub. El código fuente Mermaid queda abajo (versionable y editable). El rigor
+> formal del caso de uso vive en las especificaciones más abajo.
+
+<details>
+<summary>Código fuente del diagrama (Mermaid)</summary>
 
 ```mermaid
 flowchart LR
@@ -64,8 +69,7 @@ flowchart LR
     uc08 -.->|include| ucm
 ```
 
-> Nota de compatibilidad: sin emojis y con la forma canónica de arista
-> `-.->|include|`, para que GitHub renderice el diagrama sin error.
+</details>
 
 Las asociaciones del Administrador con UC-01/05/07/09/10 se heredan del Operador
 (no se redibujan). El Administrador añade UC-02, 03, 04, 06 y 08.
