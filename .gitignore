@@ -1,39 +1,58 @@
-# === Secretos y configuración local ===
-.env                      # Variables sensibles (SECRET_KEY, credenciales BD). NUNCA al repo.
-!.env.example             # Excepción: la plantilla SIN secretos SÍ se versiona.
+# =============================================================================
+# .gitignore — OT-Asset-Registry
+# IMPORTANTE: Git solo reconoce comentarios que INICIAN la línea con '#'.
+# Un '#' después de un patrón NO es comentario: se vuelve parte del patrón
+# y la regla deja de funcionar. Por eso cada comentario va en su propia línea.
+# =============================================================================
 
-# === Base de datos de desarrollo ===
-*.sqlite3                 # La BD local son datos, no código. No se versiona.
+# --- Secretos y configuración local ---
+# Variables sensibles (SECRET_KEY, credenciales de BD). NUNCA al repo.
+.env
+.env.*
+# Excepción: la plantilla SIN secretos sí se versiona (debe ir DESPUÉS de .env.*)
+!.env.example
+
+# --- Base de datos de desarrollo ---
+# La BD local son datos, no código.
+*.sqlite3
 *.sqlite3-journal
 
-# === Entorno virtual de Python ===
-venv/                     # Se reconstruye desde requirements.txt.
+# --- Entorno virtual de Python ---
+# Se reconstruye desde requirements.txt.
+venv/
 .venv/
 env/
 ENV/
 
-# === Artefactos de Python ===
-__pycache__/              # Bytecode regenerable.
+# --- Artefactos de Python ---
+# Bytecode regenerable.
+__pycache__/
 *.py[cod]
 *$py.class
 
-# === Django ===
-/media/                   # Archivos subidos por usuarios.
-/staticfiles/             # Salida de collectstatic (se genera en despliegue).
+# --- Django ---
+# Archivos subidos por usuarios.
+/media/
+# Salida de collectstatic (se genera en despliegue).
+/staticfiles/
 /static_root/
-*.log                     # Logs locales.
+# Logs locales.
+*.log
 local_settings.py
 
 # NOTA: NO ignorar las carpetas migrations/ — las migraciones SON el diseño
 # versionado del esquema de base de datos y deben ir al repositorio.
 
-# === Editores / Sistema operativo ===
-.vscode/                  # Config local del editor (preferencia personal).
+# --- Editores / Sistema operativo ---
+# Configuración local del editor (preferencia personal).
+.vscode/
 .idea/
-.DS_Store                 # macOS.
-Thumbs.db                 # Windows.
+# macOS
+.DS_Store
+# Windows
+Thumbs.db
 
-# === Cobertura y pruebas ===
+# --- Cobertura y pruebas ---
 .coverage
 htmlcov/
 .pytest_cache/
