@@ -181,6 +181,15 @@ class AssetMovement(models.Model):
         verbose_name = "movimiento"
         verbose_name_plural = "movimientos"
         ordering = ["-timestamp", "-id"]            # más reciente primero
+        # Mínimo privilegio: el ledger solo admite "ver". Sin permisos add/change/delete
+        # genéricos, nadie puede recibirlos por error al configurar un grupo.
+        default_permissions = ("view",)
+        # Permisos de NEGOCIO: los verifica la capa de servicios (Bloque 4) antes de actuar.
+        permissions = [
+            ("register_checkin", "Puede dar de alta activos (CHECK_IN)"),
+            ("relocate_asset", "Puede reubicar activos"),
+            ("decommission_asset", "Puede dar de baja activos"),
+        ]
         indexes = [
             # acelera last_movement(): filtra por activo y ordena por fecha
             models.Index(fields=["asset", "-timestamp"], name="movement_asset_ts_idx"),
