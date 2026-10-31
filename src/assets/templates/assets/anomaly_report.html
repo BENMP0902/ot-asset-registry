@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Anomalías{% endblock %}
+{% block content %}
+  <h1>Reporte de anomalías</h1>
+  <p class="meta">Un activo operativo sin zona no aparece aquí porque la base de datos lo impide (restricción CHECK).</p>
+
+  <h2>Sin alta registrada ({{ report.sin_alta|length }})</h2>
+  <ul>
+    {% for a in report.sin_alta %}
+      <li><a href="{% url 'assets:detail' a.pk %}">{{ a.tag }}</a> — {{ a.name }}</li>
+    {% empty %}
+      <li class="meta">Ninguno.</li>
+    {% endfor %}
+  </ul>
+
+  <h2>Dados de baja ({{ report.dados_de_baja|length }})</h2>
+  <ul>
+    {% for a in report.dados_de_baja %}
+      <li><a href="{% url 'assets:detail' a.pk %}">{{ a.tag }}</a> — {{ a.name }}</li>
+    {% empty %}
+      <li class="meta">Ninguno.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

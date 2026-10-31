@@ -121,3 +121,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL = "login"                    # a dónde manda @login_required a quien no tiene sesión
+LOGIN_REDIRECT_URL = "assets:list"     # a dónde ir después de iniciar sesión
+LOGOUT_REDIRECT_URL = "login"          # a dónde ir después de cerrar sesión

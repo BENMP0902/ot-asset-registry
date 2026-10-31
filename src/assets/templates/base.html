@@ -1,0 +1,76 @@
+{% comment %}
+  Plantilla base. Sin CSS ni JS externos (sin CDN): menos superficie de cadena de
+  suministro y funciona en una red de planta sin acceso a internet.
+  Los enlaces que se ocultan por rol son COMODIDAD visual: la seguridad está en
+  las vistas y en los servicios.
+{% endcomment %}<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}OT-Asset-Registry{% endblock %} · OT-Asset-Registry</title>
+  <style>
+    :root { --bg:#f6f7f9; --fg:#1d232b; --muted:#5b6673; --line:#d8dde3; --card:#fff;
+            --accent:#1f5f8b; --ok:#2e7d32; --warn:#b26a00; --bad:#b3261e; }
+    * { box-sizing: border-box; }
+    body { margin:0; font:15px/1.5 system-ui, sans-serif; background:var(--bg); color:var(--fg); }
+    header { display:flex; flex-wrap:wrap; gap:1rem; align-items:center; padding:.75rem 1rem;
+             background:var(--fg); color:#fff; }
+    header a { color:#fff; text-decoration:none; margin-right:.75rem; }
+    header a:hover { text-decoration:underline; }
+    header nav { flex:1; }
+    header form { margin:0; display:flex; gap:.5rem; align-items:center; }
+    main { max-width:1100px; margin:1.5rem auto; padding:0 1rem; }
+    h1 { margin-top:0; }
+    table { width:100%; border-collapse:collapse; background:var(--card); }
+    th, td { text-align:left; padding:.5rem .6rem; border-bottom:1px solid var(--line); vertical-align:top; }
+    th { background:#eef1f4; font-weight:600; }
+    a { color:var(--accent); }
+    button, .btn { display:inline-block; padding:.4rem .9rem; border:1px solid var(--accent);
+                   background:var(--accent); color:#fff; border-radius:4px; cursor:pointer;
+                   text-decoration:none; font:inherit; }
+    button.danger, .btn.danger { background:var(--bad); border-color:var(--bad); }
+    header button { background:transparent; border-color:#fff; }
+    input, select, textarea { font:inherit; padding:.35rem .5rem; border:1px solid var(--line);
+                              border-radius:4px; max-width:100%; }
+    form p { margin:.75rem 0; }
+    form p label { display:block; font-weight:600; }
+    .errorlist { color:var(--bad); margin:.25rem 0; padding-left:1.2rem; }
+    .filters { display:flex; flex-wrap:wrap; gap:.5rem; margin-bottom:1rem; }
+    .msg { padding:.6rem .8rem; border-radius:4px; background:#e8f1f8; border-left:4px solid var(--accent); }
+    .msg.success { background:#e8f4ea; border-color:var(--ok); }
+    .msg.warning { background:#fdf3e2; border-color:var(--warn); }
+    .badge { padding:.1rem .5rem; border-radius:999px; font-size:.85em; font-weight:600; }
+    .badge.on { background:#e8f4ea; color:var(--ok); }
+    .badge.off { background:#fbe9e7; color:var(--bad); }
+    .badge.warn { background:#fdf3e2; color:var(--warn); }
+    .actions { display:flex; gap:.5rem; margin:1rem 0; }
+    .meta { color:var(--muted); }
+  </style>
+</head>
+<body>
+<header>
+  <strong>OT-Asset-Registry</strong>
+  {% if user.is_authenticated %}
+    <nav>
+      <a href="{% url 'assets:list' %}">Activos</a>
+      <a href="{% url 'assets:anomalies' %}">Anomalías</a>
+      {% if perms.assets.register_checkin %}<a href="{% url 'assets:register' %}">Alta de activo</a>{% endif %}
+      {% if user.is_staff %}<a href="{% url 'admin:index' %}">Admin</a>{% endif %}
+    </nav>
+    {# Logout por POST con token CSRF: un enlace GET permitiría cerrarle la sesión a alguien desde otro sitio #}
+    <form method="post" action="{% url 'logout' %}">
+      {% csrf_token %}
+      <span>{{ user.username }}</span>
+      <button type="submit">Cerrar sesión</button>
+    </form>
+  {% endif %}
+</header>
+<main>
+  {% for message in messages %}
+    <p class="msg {{ message.tags }}">{{ message }}</p>
+  {% endfor %}
+  {% block content %}{% endblock %}
+</main>
+</body>
+</html>

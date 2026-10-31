@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Activos{% endblock %}
+{% block content %}
+  <h1>Activos</h1>
+
+  <form method="get" class="filters">
+    {# {{ q }} se escapa automáticamente: el texto que el usuario escribe nunca se interpreta como HTML #}
+    <input type="search" name="q" value="{{ q }}" placeholder="Etiqueta o nombre" maxlength="100">
+    <select name="estado">
+      <option value="">Todos</option>
+      <option value="activos" {% if estado == "activos" %}selected{% endif %}>Activos</option>
+      <option value="baja" {% if estado == "baja" %}selected{% endif %}>Dados de baja</option>
+    </select>
+    <button type="submit">Filtrar</button>
+  </form>
+
+  <table>
+    <thead>
+      <tr><th>Etiqueta</th><th>Nombre</th><th>Tipo</th><th>Zona actual</th><th>Estado</th></tr>
+    </thead>
+    <tbody>
+      {% for a in assets %}
+        <tr>
+          <td><a href="{% url 'assets:detail' a.pk %}">{{ a.tag }}</a></td>
+          <td>{{ a.name }}</td>
+          <td>{{ a.asset_type }}</td>
+          <td>{{ a.zone_code|default:"—" }}</td>
+          <td>{% include "assets/_status.html" with t=a.last_movement_type %}</td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="5" class="meta">No hay activos que coincidan.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

@@ -1,0 +1,2 @@
+{# Fragmento reutilizable: traduce el último tipo de movimiento a una etiqueta de estado #}
+{% if t == "DECOMMISSION" %}<span class="badge off">Dado de baja</span>{% elif t %}<span class="badge on">Activo</span>{% else %}<span class="badge warn">Sin alta</span>{% endif %}

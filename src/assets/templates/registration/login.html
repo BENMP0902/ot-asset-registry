@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Iniciar sesión{% endblock %}
+{% block content %}
+  <h1>Iniciar sesión</h1>
+  {# El error de credenciales es genérico a propósito: no revela si el usuario existe (evita la enumeración de usuarios) #}
+  <form method="post" style="max-width:360px">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {# LoginView valida "next": solo redirige a rutas de este mismo sitio (evita open redirect) #}
+    <input type="hidden" name="next" value="{{ next }}">
+    <button type="submit">Entrar</button>
+  </form>
+{% endblock %}

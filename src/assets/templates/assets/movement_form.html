@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+  <h1>{{ title }}: {{ asset.tag }}</h1>
+  <p class="meta">{{ asset.name }} · Zona actual: {{ asset.zone_code|default:"—" }}</p>
+  {# No se pide zona de origen: el servidor la deriva del ledger #}
+  <form method="post" style="max-width:560px">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="actions">
+      <button type="submit" {% if danger %}class="danger"{% endif %}>Confirmar</button>
+      <a href="{% url 'assets:detail' asset.pk %}">Cancelar</a>
+    </div>
+  </form>
+{% endblock %}

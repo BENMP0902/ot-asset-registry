@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}{{ asset.tag }}{% endblock %}
+{% block content %}
+  <h1>{{ asset.tag }} — {{ asset.name }}</h1>
+  <p class="meta">
+    Tipo: {{ asset.asset_type }} ·
+    Zona actual: {{ asset.zone_code|default:"—" }}{% if asset.zone_name %} ({{ asset.zone_name }}){% endif %} ·
+    Estado: {% include "assets/_status.html" with t=asset.last_movement_type %}
+  </p>
+  {% if asset.description %}<p>{{ asset.description|linebreaksbr }}</p>{% endif %}
+
+  {# Solo se ofrecen acciones a activos operativos y a quien tiene el permiso. Es comodidad: el servicio vuelve a verificar. #}
+  {% if asset.last_movement_type and asset.last_movement_type != "DECOMMISSION" %}
+    <div class="actions">
+      {% if perms.assets.relocate_asset %}
+        <a class="btn" href="{% url 'assets:relocate' asset.pk %}">Reubicar</a>
+      {% endif %}
+      {% if perms.assets.decommission_asset %}
+        <a class="btn danger" href="{% url 'assets:decommission' asset.pk %}">Dar de baja</a>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <h2>Historial (ledger)</h2>
+  <table>
+    <thead>
+      <tr><th>Fecha</th><th>Movimiento</th><th>Origen</th><th>Destino</th><th>Ejecutado por</th><th>Nota</th></tr>
+    </thead>
+    <tbody>
+      {% for m in movements %}
+        <tr>
+          <td>{{ m.timestamp|date:"Y-m-d H:i" }}</td>
+          <td>{{ m.get_movement_type_display }}</td>
+          <td>{{ m.from_zone.code|default:"—" }}</td>
+          <td>{{ m.to_zone.code|default:"—" }}</td>
+          <td>{{ m.performed_by.username }}</td>
+          <td>{{ m.note }}</td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="6" class="meta">Sin movimientos: este activo no tiene alta (anomalía).</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <p><a href="{% url 'assets:list' %}">← Volver al listado</a></p>
+{% endblock %}

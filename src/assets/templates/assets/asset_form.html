@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+  <h1>{{ title }}</h1>
+  {# La validación del navegador (campos "required") es comodidad. La validación real ocurre en el servidor. #}
+  <form method="post" style="max-width:560px">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="actions">
+      <button type="submit">Guardar</button>
+      <a href="{% url 'assets:list' %}">Cancelar</a>
+    </div>
+  </form>
+{% endblock %}
