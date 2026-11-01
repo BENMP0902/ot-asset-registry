@@ -1,0 +1,76 @@
+Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+Found 39 test(s).
+Operations to perform:
+  Synchronize unmigrated apps: messages, staticfiles
+  Apply all migrations: admin, assets, auth, contenttypes, sessions
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying assets.0001_initial... OK
+  Applying assets.0002_alter_assetmovement_options... OK
+  Applying assets.0003_create_roles... OK
+  Applying sessions.0001_initial...test_asset_and_zone_with_history_are_protected (assets.tests.test_models.LedgerModelTests.test_asset_and_zone_with_history_are_protected) ... ok
+test_asset_without_movements_has_no_state (assets.tests.test_models.LedgerModelTests.test_asset_without_movements_has_no_state) ... ok
+test_bulk_update_and_delete_are_blocked (assets.tests.test_models.LedgerModelTests.test_bulk_update_and_delete_are_blocked) ... ok
+test_db_rejects_zone_combinations_invalid_for_type (assets.tests.test_models.LedgerModelTests.test_db_rejects_zone_combinations_invalid_for_type) ... ok
+test_decommission_sets_status_and_clears_zone (assets.tests.test_models.LedgerModelTests.test_decommission_sets_status_and_clears_zone) ... ok
+test_movement_cannot_be_deleted (assets.tests.test_models.LedgerModelTests.test_movement_cannot_be_deleted) ... ok
+test_movement_cannot_be_edited (assets.tests.test_models.LedgerModelTests.test_movement_cannot_be_edited) ... ok
+test_state_is_derived_from_last_movement (assets.tests.test_models.LedgerModelTests.test_state_is_derived_from_last_movement) ... ok
+test_assets_cannot_be_added_or_deleted_from_admin (assets.tests.test_roles.AdminReadOnlyTests.test_assets_cannot_be_added_or_deleted_from_admin) ... ok
+test_ledger_is_read_only_even_for_superuser (assets.tests.test_roles.AdminReadOnlyTests.test_ledger_is_read_only_even_for_superuser) ... ok
+test_administrator_permissions (assets.tests.test_roles.RolePermissionTests.test_administrator_permissions) ... ok
+test_inactive_user_loses_all_permissions (assets.tests.test_roles.RolePermissionTests.test_inactive_user_loses_all_permissions) ... ok
+test_ledger_has_no_write_crud_permissions (assets.tests.test_roles.RolePermissionTests.test_ledger_has_no_write_crud_permissions) ... ok
+test_operator_permissions (assets.tests.test_roles.RolePermissionTests.test_operator_permissions) ... ok
+test_roles_exist (assets.tests.test_roles.RolePermissionTests.test_roles_exist) ... ok
+test_anomaly_report (assets.tests.test_services.ServiceTests.test_anomaly_report) ... ok
+test_asset_without_checkin_cannot_move (assets.tests.test_services.ServiceTests.test_asset_without_checkin_cannot_move) ... ok
+test_assets_with_state_runs_a_single_query (assets.tests.test_services.ServiceTests.test_assets_with_state_runs_a_single_query) ... ok
+test_decommission_requires_reason (assets.tests.test_services.ServiceTests.test_decommission_requires_reason) ... ok
+test_decommissioned_asset_cannot_move (assets.tests.test_services.ServiceTests.test_decommissioned_asset_cannot_move) ... ok
+test_duplicate_tag_is_rejected_on_tag_field (assets.tests.test_services.ServiceTests.test_duplicate_tag_is_rejected_on_tag_field) ... ok
+test_operator_cannot_decommission (assets.tests.test_services.ServiceTests.test_operator_cannot_decommission) ... ok
+test_register_creates_asset_and_signed_checkin (assets.tests.test_services.ServiceTests.test_register_creates_asset_and_signed_checkin) ... ok
+test_register_is_atomic (assets.tests.test_services.ServiceTests.test_register_is_atomic) ... ok
+test_register_requires_permission (assets.tests.test_services.ServiceTests.test_register_requires_permission) ... ok
+test_relocation_origin_is_derived_by_server (assets.tests.test_services.ServiceTests.test_relocation_origin_is_derived_by_server) ... ok
+test_relocation_to_current_zone_is_rejected (assets.tests.test_services.ServiceTests.test_relocation_to_current_zone_is_rejected) ... ok
+test_403_page_does_not_leak_internal_permission_names (assets.tests.test_views.ViewTests.test_403_page_does_not_leak_internal_permission_names) ... ok
+test_admin_registers_asset_through_form (assets.tests.test_views.ViewTests.test_admin_registers_asset_through_form) ... ok
+test_anomaly_report_is_available_to_operator (assets.tests.test_views.ViewTests.test_anomaly_report_is_available_to_operator) ... ok
+test_anonymous_is_redirected_to_login (assets.tests.test_views.ViewTests.test_anonymous_is_redirected_to_login) ... ok
+test_asset_list_query_count_is_constant (assets.tests.test_views.ViewTests.test_asset_list_query_count_is_constant) ... ok
+test_decommission_requires_reason_then_succeeds (assets.tests.test_views.ViewTests.test_decommission_requires_reason_then_succeeds) ... ok
+test_detail_shows_actions_by_role (assets.tests.test_views.ViewTests.test_detail_shows_actions_by_role) ... ok
+test_logout_requires_post (assets.tests.test_views.ViewTests.test_logout_requires_post) ... ok
+test_operator_forced_browsing_gets_custom_403 (assets.tests.test_views.ViewTests.test_operator_forced_browsing_gets_custom_403) ... ok
+test_operator_relocates_and_sees_service_errors (assets.tests.test_views.ViewTests.test_operator_relocates_and_sees_service_errors) ... ok
+test_post_without_csrf_token_is_rejected (assets.tests.test_views.ViewTests.test_post_without_csrf_token_is_rejected) ... ok
+test_stored_xss_is_escaped (assets.tests.test_views.ViewTests.test_stored_xss_is_escaped) ... ok
+
+----------------------------------------------------------------------
+Ran 39 tests in 0.585s
+
+OK
+Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+ OK
+System check identified no issues (0 silenced).
