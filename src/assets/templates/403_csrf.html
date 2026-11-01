@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% comment %}
+  Rechazo por CSRF. Lo genera el middleware ANTES de llegar a la vista, con otra plantilla
+  (403_csrf.html), así que 403.html no lo cubre. Se renderiza sin request: aquí no hay
+  usuario ni menú. Causa típica legítima: formulario abierto en otra pestaña tras cerrar sesión.
+{% endcomment %}
+{% block title %}Formulario no verificado{% endblock %}
+{% block content %}
+  <h1>No se pudo verificar el formulario</h1>
+  <p>Por seguridad, el formulario expiró o no se envió desde esta aplicación.
+     Recarga la página e inténtalo de nuevo.</p>
+  <p><a class="btn" href="{% url 'assets:list' %}">Volver al listado de activos</a></p>
+{% endblock %}

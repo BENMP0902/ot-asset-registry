@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% comment %}
+  Página de acceso denegado. Django la usa automáticamente cuando una vista lanza
+  PermissionDenied (con DEBUG=True o False).
+  - El código HTTP sigue siendo 403: una página amable NO debe convertirse en 200,
+    porque los logs y el SIEM dependen del código real.
+  - No se muestra {{ exception }}: el mensaje interno puede revelar nombres de
+    permisos o de lógica (CWE-209, exposición de información en mensajes de error).
+{% endcomment %}
+{% block title %}Acceso denegado{% endblock %}
+{% block content %}
+  <h1>No tienes permiso para esta acción</h1>
+  <p>Tu rol no permite realizar esta operación. Si crees que deberías tener acceso,
+     solicítalo al administrador del inventario.</p>
+  <p class="meta">Este intento quedó registrado.</p>
+  <p><a class="btn" href="{% url 'assets:list' %}">Volver al listado de activos</a></p>
+{% endblock %}
